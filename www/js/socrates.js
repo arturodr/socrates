@@ -17,7 +17,7 @@ function codigo2url(codigo) {
 function procesaUrl(url) {
 	$.mobile.showPageLoadingMsg();
 	
-	if(url.lastIndexOf("http://socrates.pucp.edu.pe/", 0)) {
+	if(url.lastIndexOf("http://socrates.pucp.edu.pe/", 0)!=0) {
 		alert("URL no válido");
 	}
 	
@@ -74,7 +74,7 @@ $(document).ready(function() {
           procesaUrl(result.text);
       }, 
       function (error) {
-          alert("Scanning failed: " + error);
+          alert("No se pudo obetener código QR\n" + error);
       }
    );
         
