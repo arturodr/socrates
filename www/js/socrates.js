@@ -8,10 +8,18 @@ function url2jsonp(url) {
 function codigo2url(codigo) {
 	$.mobile.showPageLoadingMsg();
 	var url = "http://goo.gl/"+codigo;
+    /*
 	$.longUrl( url, function(result){
 		alert(result[url]);
 		procesaUrl(result[url]);
 	});
+    */
+    
+    $.get("https://www.googleapis.com/urlshortener/v1/url?shortUrl="+url, function(result){
+        alert(result[longUrl]);
+        procesaUrl(result[longUrl]);
+    });
+    
 }
 
 function procesaUrl(url) {
