@@ -1,5 +1,5 @@
 var cabecera = '<div data-role=page><div data-role=header><h1>S√≥crates</h1></div><div data-role=content>';
-var footer = '</div><div data-role=footer data-position=fixed><h1>¬© PUCP 2013</h1></div></div>';
+var footer = '</div><div data-role=footer data-position=fixed><h1>© PUCP 2013</h1></div></div>';
 
 function url2jsonp(url) {
 	return url.replace("index","index.jsonp");
@@ -8,6 +8,7 @@ function url2jsonp(url) {
 function codigo2url(codigo) {
 	$.mobile.showPageLoadingMsg();
 	var url = "http://goo.gl/"+codigo;
+    
     /*
 	$.longUrl( url, function(result){
 		alert(result[url]);
@@ -15,16 +16,18 @@ function codigo2url(codigo) {
 	});
     */
     
-    $.get("https://www.googleapis.com/urlshortener/v1/url?shortUrl="+url, function(result){
-        alert(result[longUrl]);
-        procesaUrl(result[longUrl]);
-    });
-    
+    $.get("https://www.googleapis.com/urlshortener/v1/url?shortUrl="+url+"&callback=preprocesar");
+}
+
+function preprocesar(respuesta) {
+    //console.log(respuesta["longUrl"]);
+    procesaUrl(respuesta["longUrl"]);
 }
 
 function procesaUrl(url) {
 	$.mobile.showPageLoadingMsg();
-	
+	console.log("Proecesamdo: "+url);
+    
 	if(url.lastIndexOf("http://socrates.pucp.edu.pe/", 0)!=0) {
 		alert("URL no válido");
 	}
@@ -36,6 +39,9 @@ function procesaUrl(url) {
 		$.mobile.changePage( pagina );	
 	} else {
 	
+        
+        console.log("URL JSONP: "+url2jsonp(url));
+        
 		$.get(url2jsonp(url)+"?callback=?", function(data) {
 		
 		//TODO: Validar que el URL sea de S√≥crates
@@ -78,7 +84,7 @@ $(document).ready(function() {
 
    scanner.scan(
       function (result) {
-          alert("URL:\n" + result.text);
+          //alert("URL:\n" + result.text);
           procesaUrl(result.text);
       }, 
       function (error) {
