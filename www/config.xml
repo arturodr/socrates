@@ -69,8 +69,11 @@
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
 
     
-    <gap:plugin name="BarcodeScanner" />
-    
+    <!--<gap:plugin name="BarcodeScanner"  />
+   -->
+   <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+   <gap:plugin name="com.phonegap.plugins.childbrowser" />
+
     <!-- Define app splash screen for each platform. 
     <gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
     <gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
